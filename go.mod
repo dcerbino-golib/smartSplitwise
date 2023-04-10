@@ -1,4 +1,4 @@
-module github.com/dcerbino-golib/smartSplitwise
+module github.com/dcerbino-golib/smartsplitwise
 
 go 1.20
 
