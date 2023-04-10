@@ -67,6 +67,7 @@ func getTokenClient(token string) splitwise.Client {
 
 var mainCategoryCache map[resources.Identifier]resources.MainCategory = make(map[resources.Identifier]resources.MainCategory)
 var curenciesCache map[string]resources.Currency = make(map[string]resources.Currency)
+var currentUser *resources.User
 
 func Open(token string, ctx context.Context, log *log.Logger) SwConnection {
 
@@ -236,9 +237,19 @@ func (conn *swConnectionStruct) GetExpense(id int) (resources.Expense, error) {
 }
 
 func (conn *swConnectionStruct) GetCurrentUser() (resources.User, error) {
+	if currentUser != nil {
+		return *currentUser, nil
+	}
+
 	client := conn.getClient()
 
-	return client.GetCurrentUser(conn.ctx)
+	user, err := client.GetCurrentUser(conn.ctx)
+
+	if err != nil {
+		return resources.User{}, err
+	}
+
+	return user, nil
 }
 
 func (conn *swConnectionStruct) GetExpenses(params splitwise.ExpensesParams) CommandExecutor[resources.Expense] {
