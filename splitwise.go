@@ -249,6 +249,8 @@ func (conn *swConnectionStruct) GetCurrentUser() (resources.User, error) {
 		return resources.User{}, err
 	}
 
+	currentUser = &user
+
 	return user, nil
 }
 

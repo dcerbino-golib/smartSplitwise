@@ -13,6 +13,7 @@ import (
 	"sync"
 	"testing"
 
+	"github.com/aanzolaavila/splitwise.go"
 	"github.com/aanzolaavila/splitwise.go/resources"
 	"github.com/stretchr/testify/assert"
 )
@@ -83,6 +84,46 @@ const getFriends200Response = `
   ]
 }
 `
+
+const testUser = `
+{
+    "user": {
+        "id": 123456,
+        "first_name": "test",
+        "last_name": "test",
+        "picture": {
+            "small": "https://splitwise.s3.amazonaws.com/uploads/user/avatar/123456/small_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg",
+            "medium": "https://splitwise.s3.amazonaws.com/uploads/user/avatar/123456/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg",
+            "large": "https://splitwise.s3.amazonaws.com/uploads/user/avatar/123456/large_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"
+        },
+        "custom_picture": true,
+        "email": "test@test.com",
+        "registration_status": "confirmed",
+        "force_refresh_at": null,
+        "locale": "it",
+        "country_code": "AR",
+        "date_format": "MM/DD/YYYY",
+        "default_currency": "ARS",
+        "default_group_id": -1,
+        "notifications_read": "2023-04-10T13:28:18Z",
+        "notifications_count": 0,
+        "notifications": {
+            "added_as_friend": true,
+            "added_to_group": true,
+            "expense_added": false,
+            "expense_updated": false,
+            "bills": true,
+            "payments": true,
+            "monthly_summary": true,
+            "announcements": true
+        }
+    }
+}
+`
+
+const unauthorized = `{
+    "error": "Invalid API Request: you are not logged in"
+}`
 
 type httpClientStub struct {
 	DoFunc func(*http.Request) (*http.Response, error)
@@ -291,6 +332,64 @@ func TestGetFriends(t *testing.T) {
 	}
 
 	assert.Equal(t, len(wantedRespounce.Friends), cont)
+}
+
+func TestCurrentUser(t *testing.T) {
+	assert.Nil(t, currentUser)
+	doFunc := func(r *http.Request) (*http.Response, error) {
+		resposne := http.Response{}
+		resposne.Body = io.NopCloser(strings.NewReader(testUser))
+		resposne.Header = make(map[string][]string)
+		resposne.Header["Content-Type"] = []string{"application/json", "charset=utf-8"}
+		resposne.Status = "200"
+		resposne.StatusCode = 200
+		return &resposne, nil
+	}
+
+	type responseStruct struct {
+		User resources.User
+	}
+
+	wantedRespounce := responseStruct{}
+	err := json.Unmarshal([]byte(testUser), &wantedRespounce)
+
+	if err != nil {
+		panic(err)
+	}
+
+	conn := getTestConnection(t, doFunc)
+
+	user, err := conn.GetCurrentUser()
+
+	if err != nil {
+		panic(err)
+	}
+
+	assert.Equal(t, wantedRespounce.User, user)
+	assert.NotNil(t, currentUser)
+
+	user, err = conn.GetCurrentUser()
+
+	if err != nil {
+		panic(err)
+	}
+	assert.Equal(t, wantedRespounce.User, user)
+}
+func TestCurrentUserWhenUnathorized(t *testing.T) {
+	doFunc := func(r *http.Request) (*http.Response, error) {
+		resposne := http.Response{}
+		resposne.Body = io.NopCloser(strings.NewReader(unauthorized))
+		resposne.Header = make(map[string][]string)
+		resposne.Header["Content-Type"] = []string{"application/json", "charset=utf-8"}
+		resposne.Status = "401"
+		resposne.StatusCode = 401
+		return &resposne, nil
+	}
+	conn := getTestConnection(t, doFunc)
+
+	_, err := conn.GetCurrentUser()
+	assert.ErrorIs(t, err, splitwise.ErrNotLoggedIn)
+
 }
 
 func getTestConnection(t *testing.T, doFunc func(r *http.Request) (*http.Response, error)) SwConnection {
