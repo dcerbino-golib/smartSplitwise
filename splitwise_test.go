@@ -376,6 +376,7 @@ func TestCurrentUser(t *testing.T) {
 	assert.Equal(t, wantedRespounce.User, user)
 }
 func TestCurrentUserWhenUnathorized(t *testing.T) {
+	currentUser = nil
 	doFunc := func(r *http.Request) (*http.Response, error) {
 		resposne := http.Response{}
 		resposne.Body = io.NopCloser(strings.NewReader(unauthorized))
@@ -387,8 +388,9 @@ func TestCurrentUserWhenUnathorized(t *testing.T) {
 	}
 	conn := getTestConnection(t, doFunc)
 
-	_, err := conn.GetCurrentUser()
-	assert.ErrorIs(t, err, splitwise.ErrNotLoggedIn)
+	user, err := conn.GetCurrentUser()
+	fmt.Println(user)
+	assert.ErrorIs(t, err, splitwise.ErrNotLoggedIn, "Test fail we expected %s but got %s", splitwise.ErrNotLoggedIn, err)
 
 }
 

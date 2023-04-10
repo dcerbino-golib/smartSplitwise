@@ -246,6 +246,7 @@ func (conn *swConnectionStruct) GetCurrentUser() (resources.User, error) {
 	user, err := client.GetCurrentUser(conn.ctx)
 
 	if err != nil {
+		conn.client.Logger.Printf("Unable to get current user ", err)
 		return resources.User{}, err
 	}
 
