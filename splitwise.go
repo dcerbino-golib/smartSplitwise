@@ -38,6 +38,7 @@ type SwConnection interface {
 	GetExpenses(params splitwise.ExpensesParams) CommandExecutor[resources.Expense]
 	getClient() splitwise.Client
 	getCtx() context.Context
+	GetCurrentUser() (resources.User, error)
 }
 
 type commandExecutorStruct[T splitwiseResouces] struct {
@@ -231,8 +232,13 @@ func (conn *swConnectionStruct) GetNotifications(params splitwise.NotificationsP
 
 func (conn *swConnectionStruct) GetExpense(id int) (resources.Expense, error) {
 	client := conn.getClient()
-
 	return client.GetExpense(conn.ctx, id)
+}
+
+func (conn *swConnectionStruct) GetCurrentUser() (resources.User, error) {
+	client := conn.getClient()
+
+	return client.GetCurrentUser(conn.ctx)
 }
 
 func (conn *swConnectionStruct) GetExpenses(params splitwise.ExpensesParams) CommandExecutor[resources.Expense] {
