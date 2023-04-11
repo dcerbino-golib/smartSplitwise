@@ -396,6 +396,8 @@ const unauthorized = `{
     "error": "Invalid API Request: you are not logged in"
 }`
 
+const testGroups = `{"groups":[{"id":0,"name":"Spese senza gruppo","created_at":"2019-03-02T01:25:44Z","updated_at":"2023-04-11T17:30:41Z","members":[{"id":21623741,"first_name":"test1","last_name":"test","picture":{"small":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/small_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","large":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/large_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true,"email":"test@test.com","registration_status":"confirmed","balance":[]}],"simplify_by_default":false,"original_debts":[],"simplified_debts":[],"avatar":{"small":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/v2021/avatar-nongroup-50px.png","medium":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/v2021/avatar-nongroup-100px.png","large":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/v2021/avatar-nongroup-200px.png","xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/v2021/avatar-nongroup-500px.png","xxlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/v2021/avatar-nongroup-1000px.png","original":null},"tall_avatar":{"xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_tall_avatars/avatar-nongroup-288px.png","large":"https://s3.amazonaws.com/splitwise/uploads/group/default_tall_avatars/avatar-nongroup-192px.png"},"custom_avatar":false,"cover_photo":{"xxlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_cover_photos/coverphoto-nongroup-1000px.png","xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_cover_photos/coverphoto-nongroup-500px.png"}},{"id":11741221,"name":"Familia test test","created_at":"2019-03-02T02:39:34Z","updated_at":"2023-04-10T21:37:48Z","members":[{"id":21623741,"first_name":"test1","last_name":"test","picture":{"small":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/small_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","large":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/large_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true,"email":"test@test.com","registration_status":"confirmed","balance":[{"currency_code":"ARS","amount":"4983304.52"},{"currency_code":"USD","amount":"525.0"}]},{"id":21679690,"first_name":"test2","last_name":"test","picture":{"small":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-50px.png","medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png","large":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-200px.png"},"custom_picture":false,"email":"test2@test.com","registration_status":"confirmed","balance":[{"currency_code":"ARS","amount":"-4983304.52"},{"currency_code":"USD","amount":"-525.0"}]}],"simplify_by_default":false,"original_debts":[{"from":21679690,"to":21623741,"amount":"4983304.52","currency_code":"ARS"},{"from":21679690,"to":21623741,"amount":"525.0","currency_code":"USD"}],"simplified_debts":[{"from":21679690,"to":21623741,"amount":"4983304.52","currency_code":"ARS"},{"from":21679690,"to":21623741,"amount":"525.0","currency_code":"USD"}],"whiteboard":null,"group_type":"apartment","invite_link":"https://www.splitwise.com/join/DoD65gHhn9w+cvgzh","group_reminders":null,"avatar":{"small":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/small_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg","medium":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/medium_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg","large":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/large_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg","xlarge":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/xlarge_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg","xxlarge":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/xxlarge_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg","original":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg"},"tall_avatar":{"xlarge":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/xlarge_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg","large":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/large_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg"},"custom_avatar":true,"cover_photo":{"xxlarge":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/xxlarge_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg","xlarge":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/xlarge_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg"}},{"id":11794860,"name":"Construcción","created_at":"2019-03-04T15:04:52Z","updated_at":"2019-08-02T13:38:25Z","members":[{"id":21623741,"first_name":"test1","last_name":"test","picture":{"small":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/small_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","large":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/large_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true,"email":"test@test.com","registration_status":"confirmed","balance":[{"currency_code":"ARS","amount":"49575.25"}]},{"id":21679690,"first_name":"test2","last_name":"test","picture":{"small":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-50px.png","medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png","large":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-200px.png"},"custom_picture":false,"email":"test2@test.com","registration_status":"confirmed","balance":[{"currency_code":"ARS","amount":"-49575.25"}]}],"simplify_by_default":false,"original_debts":[{"to":21623741,"from":21679690,"amount":"49575.25","currency_code":"ARS"}],"simplified_debts":[{"from":21679690,"to":21623741,"amount":"49575.25","currency_code":"ARS"}],"whiteboard":null,"group_type":"apartment","invite_link":"https://www.splitwise.com/join/jT1o4B9MQux+cvgzh","group_reminders":null,"avatar":{"small":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-teal23-house-50px.png","medium":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-teal23-house-100px.png","large":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-teal23-house-200px.png","xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-teal23-house-500px.png","xxlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-teal23-house-1000px.png","original":null},"tall_avatar":{"xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_tall_avatars/avatar-teal23-house-288px.png","large":"https://s3.amazonaws.com/splitwise/uploads/group/default_tall_avatars/avatar-teal23-house-192px.png"},"custom_avatar":false,"cover_photo":{"xxlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_cover_photos/coverphoto-teal-1000px.png","xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_cover_photos/coverphoto-teal-500px.png"}},{"id":12683611,"name":"Personal","created_at":"2019-04-29T21:20:51Z","updated_at":"2019-07-02T16:03:15Z","members":[{"id":21623741,"first_name":"test1","last_name":"test","picture":{"small":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/small_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","large":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/large_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true,"email":"test@test.com","registration_status":"confirmed","balance":[]}],"simplify_by_default":false,"original_debts":[],"simplified_debts":[],"whiteboard":null,"group_type":"apartment","invite_link":"https://www.splitwise.com/join/BbCn6pxf1f4+cvgzh","group_reminders":null,"avatar":{"small":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-blue4-house-50px.png","medium":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-blue4-house-100px.png","large":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-blue4-house-200px.png","xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-blue4-house-500px.png","xxlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-blue4-house-1000px.png","original":null},"tall_avatar":{"xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_tall_avatars/avatar-blue4-house-288px.png","large":"https://s3.amazonaws.com/splitwise/uploads/group/default_tall_avatars/avatar-blue4-house-192px.png"},"custom_avatar":false,"cover_photo":{"xxlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_cover_photos/coverphoto-blue-1000px.png","xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_cover_photos/coverphoto-blue-500px.png"}},{"id":13548002,"name":"Bautismo","created_at":"2019-06-17T20:09:48Z","updated_at":"2019-06-26T18:34:46Z","members":[{"id":21679690,"first_name":"test2","last_name":"test","picture":{"small":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-50px.png","medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png","large":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-200px.png"},"custom_picture":false,"email":"test2@test.com","registration_status":"confirmed","balance":[]},{"id":21623741,"first_name":"test1","last_name":"test","picture":{"small":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/small_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","large":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/large_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true,"email":"test@test.com","registration_status":"confirmed","balance":[]}],"simplify_by_default":false,"original_debts":[],"simplified_debts":[],"whiteboard":null,"group_type":"apartment","invite_link":"https://www.splitwise.com/join/PkT9FtyWTbL+cvgzh","group_reminders":null,"avatar":{"small":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-orange18-house-50px.png","medium":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-orange18-house-100px.png","large":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-orange18-house-200px.png","xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-orange18-house-500px.png","xxlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/avatar-orange18-house-1000px.png","original":null},"tall_avatar":{"xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_tall_avatars/avatar-orange18-house-288px.png","large":"https://s3.amazonaws.com/splitwise/uploads/group/default_tall_avatars/avatar-orange18-house-192px.png"},"custom_avatar":false,"cover_photo":{"xxlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_cover_photos/coverphoto-orange-1000px.png","xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_cover_photos/coverphoto-orange-500px.png"}},{"id":19457330,"name":"Fundación ","created_at":"2020-06-21T17:40:26Z","updated_at":"2023-04-11T12:15:53Z","members":[{"id":33433366,"first_name":"test3","last_name":"test","picture":{"small":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange11-50px.png","medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange11-100px.png","large":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange11-200px.png"},"custom_picture":false,"email":"test3@test.com","registration_status":"confirmed","balance":[{"currency_code":"ARS","amount":"-194.06"}]},{"id":21623741,"first_name":"test1","last_name":"test","picture":{"small":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/small_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","large":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/large_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true,"email":"test@test.com","registration_status":"confirmed","balance":[{"currency_code":"ARS","amount":"22918.26"}]},{"id":21702157,"first_name":"Federico","last_name":"test","picture":{"small":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby2-50px.png","medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby2-100px.png","large":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby2-200px.png"},"custom_picture":false,"email":"test4@test.com","registration_status":"confirmed","balance":[{"currency_code":"ARS","amount":"-22724.2"}]}],"simplify_by_default":false,"original_debts":[{"from":33433366,"to":21623741,"amount":"16978.44","currency_code":"ARS"},{"from":21702157,"to":21623741,"amount":"5939.82","currency_code":"ARS"},{"currency_code":"ARS","from":21702157,"to":33433366,"amount":"16784.38"}],"simplified_debts":[{"from":21702157,"to":21623741,"amount":"22724.2","currency_code":"ARS"},{"from":33433366,"to":21623741,"amount":"194.06","currency_code":"ARS"}],"whiteboard":null,"group_type":"apartment","invite_link":"https://www.splitwise.com/join/Q41YUqXHzcq+cvgzh","group_reminders":null,"avatar":{"small":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/19457330/small_d5fade38-f5cc-4afa-a6db-5db157f857f2.jpeg","medium":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/19457330/medium_d5fade38-f5cc-4afa-a6db-5db157f857f2.jpeg","large":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/19457330/large_d5fade38-f5cc-4afa-a6db-5db157f857f2.jpeg","xlarge":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/19457330/xlarge_d5fade38-f5cc-4afa-a6db-5db157f857f2.jpeg","xxlarge":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/19457330/xxlarge_d5fade38-f5cc-4afa-a6db-5db157f857f2.jpeg","original":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/19457330/d5fade38-f5cc-4afa-a6db-5db157f857f2.jpeg"},"tall_avatar":{"xlarge":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/19457330/xlarge_d5fade38-f5cc-4afa-a6db-5db157f857f2.jpeg","large":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/19457330/large_d5fade38-f5cc-4afa-a6db-5db157f857f2.jpeg"},"custom_avatar":true,"cover_photo":{"xxlarge":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/19457330/xxlarge_d5fade38-f5cc-4afa-a6db-5db157f857f2.jpeg","xlarge":"https://splitwise.s3.amazonaws.com/uploads/group/avatar/19457330/xlarge_d5fade38-f5cc-4afa-a6db-5db157f857f2.jpeg"}},{"id":29044250,"name":"Viaggio In Italia","created_at":"2021-12-18T08:53:13Z","updated_at":"2022-09-01T15:06:00Z","members":[{"id":21623741,"first_name":"test1","last_name":"test","picture":{"small":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/small_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg","large":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/large_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true,"email":"test@test.com","registration_status":"confirmed","balance":[{"currency_code":"EUR","amount":"2514.68"}]},{"id":21679690,"first_name":"test2","last_name":"test","picture":{"small":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-50px.png","medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png","large":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-200px.png"},"custom_picture":false,"email":"test2@test.com","registration_status":"confirmed","balance":[{"currency_code":"EUR","amount":"-2514.68"}]}],"simplify_by_default":false,"original_debts":[{"to":21623741,"from":21679690,"amount":"2514.68","currency_code":"EUR"}],"simplified_debts":[{"from":21679690,"to":21623741,"amount":"2514.68","currency_code":"EUR"}],"whiteboard":null,"group_type":"trip","invite_link":"https://www.splitwise.com/join/LxaFazBPRQ8+cvgzh","group_reminders":null,"avatar":{"small":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/v2021/avatar-orange37-trip-50px.png","medium":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/v2021/avatar-orange37-trip-100px.png","large":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/v2021/avatar-orange37-trip-200px.png","xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/v2021/avatar-orange37-trip-500px.png","xxlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_avatars/v2021/avatar-orange37-trip-1000px.png","original":null},"tall_avatar":{"xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_tall_avatars/avatar-orange37-trip-288px.png","large":"https://s3.amazonaws.com/splitwise/uploads/group/default_tall_avatars/avatar-orange37-trip-192px.png"},"custom_avatar":false,"cover_photo":{"xxlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_cover_photos/coverphoto-orange-1000px.png","xlarge":"https://s3.amazonaws.com/splitwise/uploads/group/default_cover_photos/coverphoto-orange-500px.png"}}]}`
+
 type httpClientStub struct {
 	DoFunc func(*http.Request) (*http.Response, error)
 }
@@ -592,7 +594,7 @@ func TestGetFriends(t *testing.T) {
 		panic(err)
 	}
 
-	conn := getTestConnection(t, doFunc)
+	conn := getClientMockedConnection(t, doFunc)
 
 	executor := conn.GetFriends()
 
@@ -628,7 +630,7 @@ func TestCurrentUser(t *testing.T) {
 		panic(err)
 	}
 
-	conn := getTestConnection(t, doFunc)
+	conn := getClientMockedConnection(t, doFunc)
 
 	user, err := conn.GetCurrentUser()
 
@@ -657,7 +659,7 @@ func TestCurrentUserWhenUnathorized(t *testing.T) {
 		resposne.StatusCode = 401
 		return &resposne, nil
 	}
-	conn := getTestConnection(t, doFunc)
+	conn := getClientMockedConnection(t, doFunc)
 
 	user, err := conn.GetCurrentUser()
 	fmt.Println(user)
@@ -684,7 +686,7 @@ func TestGetFriend(t *testing.T) {
 	err := json.Unmarshal([]byte(testFriend), &wantedRespounce)
 	assert.NoError(t, err)
 
-	conn := getTestConnection(t, doFunc)
+	conn := getClientMockedConnection(t, doFunc)
 	friend, err := conn.GetFriend(12345)
 
 	assert.NoError(t, err)
@@ -712,7 +714,7 @@ func TestGetExpence(t *testing.T) {
 	err := json.Unmarshal([]byte(testExpence), &wantedRespounce)
 	assert.NoError(t, err)
 
-	conn := getTestConnection(t, doFunc)
+	conn := getClientMockedConnection(t, doFunc)
 	expence, err := conn.GetExpense(12345)
 
 	assert.NoError(t, err)
@@ -739,7 +741,7 @@ func TestGetGroup(t *testing.T) {
 	err := json.Unmarshal([]byte(testGroup), &wantedRespounce)
 	assert.NoError(t, err)
 
-	conn := getTestConnection(t, doFunc)
+	conn := getClientMockedConnection(t, doFunc)
 	group, err := conn.GetGroup(12345)
 
 	assert.NoError(t, err)
@@ -748,7 +750,69 @@ func TestGetGroup(t *testing.T) {
 
 }
 
-func getTestConnection(t *testing.T, doFunc func(r *http.Request) (*http.Response, error)) SwConnection {
+func TestGetgroups(t *testing.T) {
+	doFunc := func(r *http.Request) (*http.Response, error) {
+		resposne := http.Response{}
+		resposne.Body = io.NopCloser(strings.NewReader(testGroups))
+		resposne.Header = make(map[string][]string)
+		resposne.Header["Content-Type"] = []string{"application/json", "charset=utf-8"}
+		resposne.Status = "200"
+		resposne.StatusCode = 200
+		return &resposne, nil
+	}
+	type responseStruct struct {
+		Groups []resources.Group
+	}
+
+	wantedRespounce := responseStruct{}
+	wantedRespounce.Groups = make([]resources.Group, 10)
+	err := json.Unmarshal([]byte(testGroups), &wantedRespounce)
+	assert.NoError(t, err, "error Unmarshaling struct espected nil but received %s", err)
+	conn := getClientMockedConnection(t, doFunc)
+	executor := conn.GetGroups()
+
+	count := 0
+
+	for _ = range executor.GetChan() {
+		count++
+	}
+	assert.Equal(t, 7, count)
+}
+
+func TestGetgroupsWithClose(t *testing.T) {
+	doFunc := func(r *http.Request) (*http.Response, error) {
+		resposne := http.Response{}
+		resposne.Body = io.NopCloser(strings.NewReader(testGroups))
+		resposne.Header = make(map[string][]string)
+		resposne.Header["Content-Type"] = []string{"application/json", "charset=utf-8"}
+		resposne.Status = "200"
+		resposne.StatusCode = 200
+		return &resposne, nil
+	}
+	type responseStruct struct {
+		Groups []resources.Group
+	}
+
+	wantedRespounce := responseStruct{}
+	wantedRespounce.Groups = make([]resources.Group, 10)
+	err := json.Unmarshal([]byte(testGroups), &wantedRespounce)
+	assert.NoError(t, err, "error Unmarshaling struct espected nil but received %s", err)
+	conn := getClientMockedConnection(t, doFunc)
+	executor := conn.GetGroups()
+
+	count := 0
+
+	for _ = range executor.GetChan() {
+		count++
+		if count == 1 {
+			executor.Close()
+			assert.True(t, executor.isClose())
+		}
+	}
+	assert.Equal(t, 1, count)
+}
+
+func getClientMockedConnection(t *testing.T, doFunc func(r *http.Request) (*http.Response, error)) SwConnection {
 	client := Open("testtoken", context.Background(), log.New(os.Stdout, "Test Splitwise LOG: ", log.Lshortfile))
 
 	bareclient, ok := client.(*swConnectionStruct)
