@@ -121,6 +121,277 @@ const testUser = `
 }
 `
 
+const testFriend = `{
+    "friend": {
+        "id": 12345,
+        "first_name": "test",
+        "last_name": "test",
+        "email": "test@test.com",
+        "registration_status": "confirmed",
+        "picture": {
+            "small": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-50px.png",
+            "medium": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png",
+            "large": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-200px.png"
+        },
+        "balance": [
+            {
+                "currency_code": "ARS",
+                "amount": "5032879.77"
+            },
+            {
+                "currency_code": "USD",
+                "amount": "525.0"
+            },
+            {
+                "currency_code": "EUR",
+                "amount": "2514.68"
+            }
+        ],
+        "groups": [
+            {
+                "group_id": 11741221,
+                "balance": [
+                    {
+                        "currency_code": "ARS",
+                        "amount": "4983304.52"
+                    },
+                    {
+                        "currency_code": "USD",
+                        "amount": "525.0"
+                    }
+                ]
+            },
+            {
+                "group_id": 11794860,
+                "balance": [
+                    {
+                        "currency_code": "ARS",
+                        "amount": "49575.25"
+                    }
+                ]
+            },
+            {
+                "group_id": 13548002,
+                "balance": []
+            },
+            {
+                "group_id": 29044250,
+                "balance": [
+                    {
+                        "currency_code": "EUR",
+                        "amount": "2514.68"
+                    }
+                ]
+            },
+            {
+                "group_id": 0,
+                "balance": []
+            }
+        ],
+        "updated_at": "2023-04-10T21:37:48Z"
+    }
+}`
+
+const testGroup = `{
+    "group": {
+        "id": 12345,
+        "name": "test",
+        "created_at": "2019-03-02T02:39:34Z",
+        "updated_at": "2023-04-10T21:37:48Z",
+        "members": [
+            {
+                "id": 21623741,
+                "first_name": "test1",
+                "last_name": "test1",
+                "picture": {
+                    "small": "https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/small_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg",
+                    "medium": "https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg",
+                    "large": "https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/large_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"
+                },
+                "custom_picture": true,
+                "email": "test1@test.com",
+                "registration_status": "confirmed",
+                "balance": [
+                    {
+                        "currency_code": "ARS",
+                        "amount": "4983304.52"
+                    },
+                    {
+                        "currency_code": "USD",
+                        "amount": "525.0"
+                    }
+                ]
+            },
+            {
+                "id": 21679690,
+                "first_name": "test2",
+                "last_name": "test2",
+                "picture": {
+                    "small": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-50px.png",
+                    "medium": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png",
+                    "large": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-200px.png"
+                },
+                "custom_picture": false,
+                "email": "test2@test.com",
+                "registration_status": "confirmed",
+                "balance": [
+                    {
+                        "currency_code": "ARS",
+                        "amount": "-4983304.52"
+                    },
+                    {
+                        "currency_code": "USD",
+                        "amount": "-525.0"
+                    }
+                ]
+            }
+        ],
+        "simplify_by_default": false,
+        "original_debts": [
+            {
+                "from": 21679690,
+                "to": 21623741,
+                "amount": "4983304.52",
+                "currency_code": "ARS"
+            },
+            {
+                "from": 21679690,
+                "to": 21623741,
+                "amount": "525.0",
+                "currency_code": "USD"
+            }
+        ],
+        "simplified_debts": [
+            {
+                "from": 21679690,
+                "to": 21623741,
+                "amount": "4983304.52",
+                "currency_code": "ARS"
+            },
+            {
+                "from": 21679690,
+                "to": 21623741,
+                "amount": "525.0",
+                "currency_code": "USD"
+            }
+        ],
+        "whiteboard": null,
+        "group_type": "apartment",
+        "invite_link": "https://www.splitwise.com/join/DoD65gHhn9w+cvgzh",
+        "group_reminders": null,
+        "avatar": {
+            "small": "https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/small_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg",
+            "medium": "https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/medium_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg",
+            "large": "https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/large_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg",
+            "xlarge": "https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/xlarge_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg",
+            "xxlarge": "https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/xxlarge_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg",
+            "original": "https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg"
+        },
+        "tall_avatar": {
+            "xlarge": "https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/xlarge_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg",
+            "large": "https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/large_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg"
+        },
+        "custom_avatar": true,
+        "cover_photo": {
+            "xxlarge": "https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/xxlarge_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg",
+            "xlarge": "https://splitwise.s3.amazonaws.com/uploads/group/avatar/11741221/xlarge_2a568696-c654-4fca-b761-a5554d9c2c2e.jpeg"
+        }
+    }
+}`
+
+const testExpence = `{
+    "expense": {
+        "id": 12345,
+        "group_id": 12345,
+        "friendship_id": null,
+        "expense_bundle_id": null,
+        "description": "TelViso",
+        "repeats": false,
+        "repeat_interval": null,
+        "email_reminder": false,
+        "email_reminder_in_advance": -1,
+        "next_repeat": null,
+        "details": null,
+        "comments_count": 0,
+        "payment": false,
+        "creation_method": "equal",
+        "transaction_method": "offline",
+        "transaction_confirmed": false,
+        "transaction_id": null,
+        "transaction_status": null,
+        "cost": "2048.49",
+        "currency_code": "ARS",
+        "repayments": [
+            {
+                "from": 21623741,
+                "to": 21702157,
+                "amount": "1024.25"
+            }
+        ],
+        "date": "2023-04-11T01:49:27Z",
+        "created_at": "2023-04-11T01:50:38Z",
+        "created_by": {
+            "id": 21702157,
+            "first_name": "Test",
+            "last_name": "Test",
+            "picture": {
+                "medium": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby2-100px.png"
+            },
+            "custom_picture": false
+        },
+        "updated_at": "2023-04-11T01:51:30Z",
+        "updated_by": {
+            "id": 21702157,
+            "first_name": "Test",
+            "last_name": "Test",
+            "picture": {
+                "medium": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby2-100px.png"
+            },
+            "custom_picture": false
+        },
+        "deleted_at": null,
+        "deleted_by": null,
+        "category": {
+            "id": 8,
+            "name": "TV/Telefono/Internet"
+        },
+        "receipt": {
+            "large": "https://splitwise.s3.amazonaws.com/uploads/expense/receipt/2292261592/large_6f10dd05-019c-49f0-816a-cb0818aa982b.png",
+            "original": "https://splitwise.s3.amazonaws.com/uploads/expense/receipt/2292261592/6f10dd05-019c-49f0-816a-cb0818aa982b.pdf"
+        },
+        "users": [
+            {
+                "user": {
+                    "id": 21702157,
+                    "first_name": "Test",
+                    "last_name": "Test",
+                    "picture": {
+                        "medium": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby2-100px.png"
+                    }
+                },
+                "user_id": 21702157,
+                "paid_share": "2048.49",
+                "owed_share": "1024.24",
+                "net_balance": "1024.25"
+            },
+            {
+                "user": {
+                    "id": 21623741,
+                    "first_name": "Test2",
+                    "last_name": "Test2",
+                    "picture": {
+                        "medium": "https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"
+                    }
+                },
+                "user_id": 21623741,
+                "paid_share": "0.0",
+                "owed_share": "1024.25",
+                "net_balance": "-1024.25"
+            }
+        ],
+        "comments": []
+    }
+}`
 const unauthorized = `{
     "error": "Invalid API Request: you are not logged in"
 }`
@@ -391,6 +662,89 @@ func TestCurrentUserWhenUnathorized(t *testing.T) {
 	user, err := conn.GetCurrentUser()
 	fmt.Println(user)
 	assert.ErrorIs(t, err, splitwise.ErrNotLoggedIn, "Test fail we expected %s but got %s", splitwise.ErrNotLoggedIn, err)
+
+}
+
+func TestGetFriend(t *testing.T) {
+	doFunc := func(r *http.Request) (*http.Response, error) {
+		resposne := http.Response{}
+		resposne.Body = io.NopCloser(strings.NewReader(testFriend))
+		resposne.Header = make(map[string][]string)
+		resposne.Header["Content-Type"] = []string{"application/json", "charset=utf-8"}
+		resposne.Status = "200"
+		resposne.StatusCode = 200
+		return &resposne, nil
+	}
+
+	type responseStruct struct {
+		Friend resources.Friend
+	}
+
+	wantedRespounce := responseStruct{}
+	err := json.Unmarshal([]byte(testFriend), &wantedRespounce)
+	assert.NoError(t, err)
+
+	conn := getTestConnection(t, doFunc)
+	friend, err := conn.GetFriend(12345)
+
+	assert.NoError(t, err)
+
+	assert.Equal(t, wantedRespounce.Friend, friend)
+
+}
+
+func TestGetExpence(t *testing.T) {
+	doFunc := func(r *http.Request) (*http.Response, error) {
+		resposne := http.Response{}
+		resposne.Body = io.NopCloser(strings.NewReader(testExpence))
+		resposne.Header = make(map[string][]string)
+		resposne.Header["Content-Type"] = []string{"application/json", "charset=utf-8"}
+		resposne.Status = "200"
+		resposne.StatusCode = 200
+		return &resposne, nil
+	}
+
+	type responseStruct struct {
+		Expense resources.Expense
+	}
+
+	wantedRespounce := responseStruct{}
+	err := json.Unmarshal([]byte(testExpence), &wantedRespounce)
+	assert.NoError(t, err)
+
+	conn := getTestConnection(t, doFunc)
+	expence, err := conn.GetExpense(12345)
+
+	assert.NoError(t, err)
+
+	assert.Equal(t, wantedRespounce.Expense, expence)
+}
+
+func TestGetGroup(t *testing.T) {
+	doFunc := func(r *http.Request) (*http.Response, error) {
+		resposne := http.Response{}
+		resposne.Body = io.NopCloser(strings.NewReader(testGroup))
+		resposne.Header = make(map[string][]string)
+		resposne.Header["Content-Type"] = []string{"application/json", "charset=utf-8"}
+		resposne.Status = "200"
+		resposne.StatusCode = 200
+		return &resposne, nil
+	}
+
+	type responseStruct struct {
+		Group resources.Group
+	}
+
+	wantedRespounce := responseStruct{}
+	err := json.Unmarshal([]byte(testGroup), &wantedRespounce)
+	assert.NoError(t, err)
+
+	conn := getTestConnection(t, doFunc)
+	group, err := conn.GetGroup(12345)
+
+	assert.NoError(t, err)
+
+	assert.Equal(t, wantedRespounce.Group, group)
 
 }
 
