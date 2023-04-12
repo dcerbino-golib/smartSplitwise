@@ -8,15 +8,20 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
+	"strconv"
 	"strings"
 	"sync"
 	"testing"
+	"time"
 
 	"github.com/aanzolaavila/splitwise.go"
 	"github.com/aanzolaavila/splitwise.go/resources"
 	"github.com/stretchr/testify/assert"
 )
+
+const testExpences = `{"expenses":[{"id":2123851796,"group_id":11741221,"friendship_id":null,"expense_bundle_id":null,"description":"Jumbo","repeats":false,"repeat_interval":null,"email_reminder":false,"email_reminder_in_advance":-1,"next_repeat":null,"details":null,"comments_count":1,"payment":false,"creation_method":null,"transaction_method":"offline","transaction_confirmed":false,"transaction_id":null,"transaction_status":null,"cost":"1083.92","currency_code":"ARS","repayments":[{"from":21679690,"to":21623741,"amount":"541.96"}],"date":"2023-01-09T14:41:00Z","created_at":"2023-01-11T14:42:02Z","created_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"updated_at":"2023-01-11T17:18:08Z","updated_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"deleted_at":null,"deleted_by":null,"category":{"id":12,"name":"Alimentari"},"receipt":{"large":"https://splitwise.s3.amazonaws.com/uploads/expense/receipt/2123851796/large_f6af2889-3255-429a-b6ba-915d8d4b3376.png","original":"https://splitwise.s3.amazonaws.com/uploads/expense/receipt/2123851796/f6af2889-3255-429a-b6ba-915d8d4b3376.pdf"},"users":[{"user":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"}},"user_id":21679690,"paid_share":"0.0","owed_share":"541.96","net_balance":"-541.96"},{"user":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"}},"user_id":21623741,"paid_share":"1083.92","owed_share":"541.96","net_balance":"541.96"}]},{"id":2115167389,"group_id":11741221,"friendship_id":null,"expense_bundle_id":null,"description":"Fiambre","repeats":false,"repeat_interval":null,"email_reminder":false,"email_reminder_in_advance":-1,"next_repeat":null,"details":null,"comments_count":0,"payment":false,"creation_method":"equal","transaction_method":"offline","transaction_confirmed":false,"transaction_id":null,"transaction_status":null,"cost":"1185.0","currency_code":"ARS","repayments":[{"from":21679690,"to":21623741,"amount":"592.5"}],"date":"2023-01-06T21:44:18Z","created_at":"2023-01-06T21:44:52Z","created_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"updated_at":"2023-01-06T21:44:52Z","updated_by":null,"deleted_at":null,"deleted_by":null,"category":{"id":12,"name":"Alimentari"},"receipt":{"large":null,"original":null},"users":[{"user":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"}},"user_id":21623741,"paid_share":"1185.0","owed_share":"592.5","net_balance":"592.5"},{"user":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"}},"user_id":21679690,"paid_share":"0.0","owed_share":"592.5","net_balance":"-592.5"}]},{"id":2115163070,"group_id":11741221,"friendship_id":null,"expense_bundle_id":null,"description":"Jumbo","repeats":false,"repeat_interval":null,"email_reminder":false,"email_reminder_in_advance":-1,"next_repeat":null,"details":null,"comments_count":0,"payment":false,"creation_method":null,"transaction_method":"offline","transaction_confirmed":false,"transaction_id":null,"transaction_status":null,"cost":"23134.09","currency_code":"ARS","repayments":[{"from":21679690,"to":21623741,"amount":"11567.05"}],"date":"2023-01-06T21:40:55Z","created_at":"2023-01-06T21:41:23Z","created_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"updated_at":"2023-01-06T21:41:24Z","updated_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"deleted_at":null,"deleted_by":null,"category":{"id":12,"name":"Alimentari"},"receipt":{"large":"https://splitwise.s3.amazonaws.com/uploads/expense/receipt/2115163070/large_28a40d87-5e70-4942-a9c8-673b8f8e2f40.png","original":"https://splitwise.s3.amazonaws.com/uploads/expense/receipt/2115163070/28a40d87-5e70-4942-a9c8-673b8f8e2f40.pdf"},"users":[{"user":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"}},"user_id":21623741,"paid_share":"23134.09","owed_share":"11567.04","net_balance":"11567.05"},{"user":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"}},"user_id":21679690,"paid_share":"0.0","owed_share":"11567.05","net_balance":"-11567.05"}]},{"id":2115160067,"group_id":11741221,"friendship_id":null,"expense_bundle_id":null,"description":"Regalo Nati","repeats":false,"repeat_interval":null,"email_reminder":false,"email_reminder_in_advance":-1,"next_repeat":null,"details":null,"comments_count":0,"payment":false,"creation_method":"equal","transaction_method":"offline","transaction_confirmed":false,"transaction_id":null,"transaction_status":null,"cost":"3680.0","currency_code":"ARS","repayments":[{"from":21679690,"to":21623741,"amount":"1840.0"}],"date":"2023-01-06T21:38:07Z","created_at":"2023-01-06T21:39:04Z","created_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"updated_at":"2023-01-06T21:39:04Z","updated_by":null,"deleted_at":null,"deleted_by":null,"category":{"id":42,"name":"Regali"},"receipt":{"large":null,"original":null},"users":[{"user":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"}},"user_id":21623741,"paid_share":"3680.0","owed_share":"1840.0","net_balance":"1840.0"},{"user":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"}},"user_id":21679690,"paid_share":"0.0","owed_share":"1840.0","net_balance":"-1840.0"}]},{"id":2114356059,"group_id":11741221,"friendship_id":null,"expense_bundle_id":null,"description":"Payment","repeats":false,"repeat_interval":null,"email_reminder":false,"email_reminder_in_advance":-1,"next_repeat":null,"details":null,"comments_count":1,"payment":true,"creation_method":"payment","transaction_method":"offline","transaction_confirmed":false,"transaction_id":null,"transaction_status":null,"cost":"5000.0","currency_code":"ARS","repayments":[{"from":21679690,"to":21623741,"amount":"5000.0"}],"date":"2023-01-06T13:38:32Z","created_at":"2023-01-06T13:38:35Z","created_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"updated_at":"2023-01-06T13:38:35Z","updated_by":null,"deleted_at":null,"deleted_by":null,"category":{"id":18,"name":"Generali"},"receipt":{"large":null,"original":null},"users":[{"user":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"}},"user_id":21623741,"paid_share":"5000.0","owed_share":"0.0","net_balance":"5000.0"},{"user":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"}},"user_id":21679690,"paid_share":"0.0","owed_share":"5000.0","net_balance":"-5000.0"}]},{"id":2114350422,"group_id":11741221,"friendship_id":null,"expense_bundle_id":null,"description":"Matafuego","repeats":false,"repeat_interval":null,"email_reminder":false,"email_reminder_in_advance":-1,"next_repeat":null,"details":null,"comments_count":0,"payment":false,"creation_method":null,"transaction_method":"offline","transaction_confirmed":false,"transaction_id":null,"transaction_status":null,"cost":"5000.0","currency_code":"ARS","repayments":[{"from":21623741,"to":21679690,"amount":"2500.0"}],"date":"2023-01-06T13:35:16Z","created_at":"2023-01-06T13:35:25Z","created_by":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"},"custom_picture":false},"updated_at":"2023-01-06T21:42:22Z","updated_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"deleted_at":null,"deleted_by":null,"category":{"id":15,"name":"Auto"},"receipt":{"large":null,"original":null},"users":[{"user":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"}},"user_id":21679690,"paid_share":"5000.0","owed_share":"2500.0","net_balance":"2500.0"},{"user":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"}},"user_id":21623741,"paid_share":"0.0","owed_share":"2500.0","net_balance":"-2500.0"}]},{"id":2114349755,"group_id":11741221,"friendship_id":null,"expense_bundle_id":null,"description":"Chocolates keto","repeats":false,"repeat_interval":null,"email_reminder":false,"email_reminder_in_advance":-1,"next_repeat":null,"details":null,"comments_count":0,"payment":false,"creation_method":null,"transaction_method":"offline","transaction_confirmed":false,"transaction_id":null,"transaction_status":null,"cost":"1140.0","currency_code":"ARS","repayments":[{"from":21623741,"to":21679690,"amount":"570.0"}],"date":"2023-01-06T13:34:28Z","created_at":"2023-01-06T13:35:02Z","created_by":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"},"custom_picture":false},"updated_at":"2023-01-06T21:42:31Z","updated_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"deleted_at":null,"deleted_by":null,"category":{"id":12,"name":"Alimentari"},"receipt":{"large":null,"original":null},"users":[{"user":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"}},"user_id":21679690,"paid_share":"1140.0","owed_share":"570.0","net_balance":"570.0"},{"user":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"}},"user_id":21623741,"paid_share":"0.0","owed_share":"570.0","net_balance":"-570.0"}]},{"id":2114348276,"group_id":11741221,"friendship_id":null,"expense_bundle_id":null,"description":"Verduleria","repeats":false,"repeat_interval":null,"email_reminder":false,"email_reminder_in_advance":-1,"next_repeat":null,"details":null,"comments_count":0,"payment":false,"creation_method":null,"transaction_method":"offline","transaction_confirmed":false,"transaction_id":null,"transaction_status":null,"cost":"2500.0","currency_code":"ARS","repayments":[{"from":21679690,"to":21623741,"amount":"1250.0"}],"date":"2023-01-06T13:33:58Z","created_at":"2023-01-06T13:34:10Z","created_by":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"},"custom_picture":false},"updated_at":"2023-01-06T21:42:34Z","updated_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"deleted_at":null,"deleted_by":null,"category":{"id":12,"name":"Alimentari"},"receipt":{"large":null,"original":null},"users":[{"user":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"}},"user_id":21679690,"paid_share":"0.0","owed_share":"1250.0","net_balance":"-1250.0"},{"user":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"}},"user_id":21623741,"paid_share":"2500.0","owed_share":"1250.0","net_balance":"1250.0"}]},{"id":2114347861,"group_id":11741221,"friendship_id":null,"expense_bundle_id":null,"description":"Verduleria ","repeats":false,"repeat_interval":null,"email_reminder":false,"email_reminder_in_advance":-1,"next_repeat":null,"details":null,"comments_count":0,"payment":false,"creation_method":null,"transaction_method":"offline","transaction_confirmed":false,"transaction_id":null,"transaction_status":null,"cost":"2500.0","currency_code":"ARS","repayments":[{"from":21623741,"to":21679690,"amount":"1250.0"}],"date":"2023-01-06T13:33:47Z","created_at":"2023-01-06T13:33:56Z","created_by":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"},"custom_picture":false},"updated_at":"2023-01-06T21:42:38Z","updated_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"deleted_at":null,"deleted_by":null,"category":{"id":12,"name":"Alimentari"},"receipt":{"large":null,"original":null},"users":[{"user":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"}},"user_id":21623741,"paid_share":"0.0","owed_share":"1250.0","net_balance":"-1250.0"},{"user":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"}},"user_id":21679690,"paid_share":"2500.0","owed_share":"1250.0","net_balance":"1250.0"}]},{"id":2114348729,"group_id":11741221,"friendship_id":null,"expense_bundle_id":null,"description":"Consulta pediatra ","repeats":false,"repeat_interval":null,"email_reminder":false,"email_reminder_in_advance":-1,"next_repeat":null,"details":null,"comments_count":0,"payment":false,"creation_method":null,"transaction_method":"offline","transaction_confirmed":false,"transaction_id":null,"transaction_status":null,"cost":"5500.0","currency_code":"ARS","repayments":[{"from":21623741,"to":21679690,"amount":"2750.0"}],"date":"2023-01-05T13:34:00Z","created_at":"2023-01-06T13:34:26Z","created_by":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"},"custom_picture":false},"updated_at":"2023-01-06T21:42:57Z","updated_by":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"},"custom_picture":true},"deleted_at":null,"deleted_by":null,"category":{"id":43,"name":"Spese mediche"},"receipt":{"large":null,"original":null},"users":[{"user":{"id":21679690,"first_name":"test2","last_name":"test","picture":{"medium":"https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-orange1-100px.png"}},"user_id":21679690,"paid_share":"5500.0","owed_share":"2750.0","net_balance":"2750.0"},{"user":{"id":21623741,"first_name":"test1","last_name":"test","picture":{"medium":"https://splitwise.s3.amazonaws.com/uploads/user/avatar/21623741/medium_5b87c7d4-d6f5-4ef1-9a7f-0b8fbd0b806d.jpeg"}},"user_id":21623741,"paid_share":"0.0","owed_share":"2750.0","net_balance":"-2750.0"}]}]}`
 
 const getFriends200Response = `
 {
@@ -748,6 +753,112 @@ func TestGetGroup(t *testing.T) {
 
 	assert.Equal(t, wantedRespounce.Group, group)
 
+}
+
+func getIntFromParams(url *url.URL, param string) int {
+	urlValues := url.Query()
+
+	tmps, ok := urlValues[param]
+
+	if !ok {
+		return 0
+	} else if len(tmps) > 0 {
+		rtr, err := strconv.Atoi(tmps[0])
+		if err != nil {
+			panic("unable to parse limit")
+		}
+		return rtr
+	}
+	return 0
+}
+
+func TestGetExpences(t *testing.T) {
+	type responseStruct struct {
+		Expenses []resources.Expense
+	}
+	wantedRespounce := responseStruct{}
+	wantedRespounce.Expenses = make([]resources.Expense, 10)
+	err := json.Unmarshal([]byte(testExpences), &wantedRespounce)
+
+	assert.NoError(t, err, "error Unmarshaling struct espected nil but received %s", err)
+
+	doFunc := func(r *http.Request) (*http.Response, error) {
+		resposne := http.Response{}
+
+		limit := getIntFromParams(r.URL, "limit")
+		offset := getIntFromParams(r.URL, "offset")
+
+		if len(wantedRespounce.Expenses) > offset {
+			patial := responseStruct{}
+			patial.Expenses = wantedRespounce.Expenses[offset : offset+limit]
+			content, err := json.Marshal(patial)
+			if err != nil {
+				panic("error converting parial strunt")
+			}
+			resposne.Body = io.NopCloser(bytes.NewReader(content))
+		} else {
+			resposne.Body = io.NopCloser(bytes.NewReader([]byte{}))
+		}
+
+		resposne.Header = make(map[string][]string)
+		resposne.Header["Content-Type"] = []string{"application/json", "charset=utf-8"}
+		resposne.Status = "200"
+		resposne.StatusCode = 200
+		return &resposne, nil
+	}
+
+	assert.NoError(t, err, "error Unmarshaling struct espected nil but received %s", err)
+
+	conn := getClientMockedConnection(t, doFunc)
+
+	params := splitwise.ExpensesParams{}
+	params[splitwise.ExpensesDatedAfter] = time.Date(time.Now().Year(), 1, 1, 0, 0, 0, 0, time.Local)
+	params[splitwise.ExpensesGroupId] = "12345"
+	params[splitwise.ExpensesLimit] = 5
+
+	executor := conn.GetExpenses(params)
+
+	count := 0
+
+	for _ = range executor.GetChan() {
+		count++
+	}
+	assert.Equal(t, 10, count)
+	assert.True(t, executor.isClose())
+}
+
+func TestGetExpencesWithPanic(t *testing.T) {
+	type responseStruct struct {
+		Expenses []resources.Expense
+	}
+	wantedRespounce := responseStruct{}
+	wantedRespounce.Expenses = make([]resources.Expense, 10)
+	err := json.Unmarshal([]byte(testExpences), &wantedRespounce)
+
+	assert.NoError(t, err, "error Unmarshaling struct espected nil but received %s", err)
+
+	doFunc := func(r *http.Request) (*http.Response, error) {
+		panic("painic produced in test")
+	}
+
+	assert.NoError(t, err, "error Unmarshaling struct espected nil but received %s", err)
+
+	conn := getClientMockedConnection(t, doFunc)
+
+	params := splitwise.ExpensesParams{}
+	params[splitwise.ExpensesDatedAfter] = time.Date(time.Now().Year(), 1, 1, 0, 0, 0, 0, time.Local)
+	params[splitwise.ExpensesGroupId] = "12345"
+	params[splitwise.ExpensesLimit] = 5
+
+	executor := conn.GetExpenses(params)
+
+	count := 0
+
+	for _ = range executor.GetChan() {
+		count++
+	}
+	assert.Equal(t, 0, count)
+	assert.True(t, executor.isClose())
 }
 
 func TestGetgroups(t *testing.T) {
