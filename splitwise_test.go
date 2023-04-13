@@ -901,6 +901,7 @@ func TestGetExpences(t *testing.T) {
 	testCases := []struct {
 		Params        splitwise.ExpensesParams
 		ExpectedValus int
+		closeAfter    int
 	}{
 		{
 			Params: splitwise.ExpensesParams{
@@ -909,6 +910,14 @@ func TestGetExpences(t *testing.T) {
 				splitwise.ExpensesLimit:      5,
 			},
 			ExpectedValus: 10,
+		}, {
+			Params: splitwise.ExpensesParams{
+				splitwise.ExpensesDatedAfter: time.Date(time.Now().Year(), 1, 1, 0, 0, 0, 0, time.Local),
+				splitwise.ExpensesGroupId:    "12345",
+				splitwise.ExpensesLimit:      5,
+			},
+			ExpectedValus: 2,
+			closeAfter:    1,
 		}, {
 			Params: splitwise.ExpensesParams{
 				splitwise.ExpensesDatedAfter: time.Date(time.Now().Year(), 1, 1, 0, 0, 0, 0, time.Local),
@@ -929,12 +938,15 @@ func TestGetExpences(t *testing.T) {
 	for _, params := range testCases {
 		executor := conn.GetExpenses(params.Params)
 
-		count := 0
+		cont := 0
 
 		for range executor.GetChan() {
-			count++
+			cont++
+			if (cont > params.closeAfter) && (params.closeAfter != 0) {
+				executor.Close()
+			}
 		}
-		assert.Equal(t, params.ExpectedValus, count)
+		assert.Equal(t, params.ExpectedValus, cont)
 		assert.True(t, executor.isClose())
 	}
 }
